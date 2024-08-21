@@ -1,0 +1,50 @@
+.main_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 1;
+}
+
+.main_page_header_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.main_title_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.zman_name{
+    text-align: right;
+    width: 100%;
+}
+
+.header2{
+    text-align: center;
+}
+
+.header2_card{
+    width: 80%;
+}
+
+.rest_weeks{
+    text-align: center;
+}
+
+.student_amount_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10%;
+    width: 80%;
+}
+
+.sub_total_zman_goal{
+    font-size: 20px;
+    margin-right: 1px;
+}

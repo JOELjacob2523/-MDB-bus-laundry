@@ -1,0 +1,19 @@
+.zman_goal_container{
+    width: 100%;
+}
+
+.zman_goal_container_inner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.zman_goal_form{
+    width: 100%;
+}
+
+.submit_goal_form_btn{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}

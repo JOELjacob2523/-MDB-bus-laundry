@@ -1,0 +1,79 @@
+.google_maps_container{
+  height: 70vh; 
+  width: 100%;
+  position: relative;
+  padding: 20px;
+}
+
+.google_maps_map_container{
+  height: 65vh; 
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+}
+
+.google_maps_directions_container{
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1; 
+}
+
+.download_btn_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.google_maps_calculation_container{
+  display: flex;
+  flex-direction: column;
+}
+
+.google_maps_calculation_select{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.google_maps_calculation_multi_select{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.calculate_routes_btn_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.calculate_routes_btn{
+  width: 60%;
+}
+
+.download_modal_container{
+  padding: 20px 20px 30px 20px;
+}
+
+.download_modal_inner{
+  padding: 10px;
+}
+
+.download_modal_route{
+  text-decoration: underline;
+}
+
+.download_modal_card_inner{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+}

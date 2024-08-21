@@ -1,0 +1,17 @@
+.sider_container{
+    display: flex;
+    position: sticky;
+    top: 0;
+    flex: 0 0 250px;
+    background-color: aliceblue;
+    filter: drop-shadow(3px 0 3px gray);
+}
+
+.sider{
+    width: 100%;
+}
+
+.sidebar_menu{
+    width: 250px;
+    background-color: aliceblue;
+}

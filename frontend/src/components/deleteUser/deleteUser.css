@@ -1,0 +1,19 @@
+.delete_icon_outer{
+    color: red;
+    font-size: large;
+}
+
+.delete_icon_outer:hover{
+    cursor: pointer;
+}
+
+.title_header{
+    display: flex;
+    align-items: center;
+}
+
+.delete_icon{
+    color: red;
+    font-size: large;
+    margin-right: 5px;
+}

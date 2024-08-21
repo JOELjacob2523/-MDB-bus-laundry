@@ -1,0 +1,21 @@
+.main_old_data_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.main_old_data_card{
+    width: 70%;
+}
+
+.old_data_search_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.old_data_search_input{
+    width: 70%;
+}

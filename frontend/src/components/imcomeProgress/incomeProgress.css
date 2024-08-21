@@ -1,0 +1,59 @@
+.main_progress_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.long_progress{
+    padding: 15px 0 15px 0;
+}
+
+.round_progress{
+    padding-top: 15px;
+}
+
+.bottom_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.total_balance_card{
+    width: 25%;
+}
+
+.awaiting_income_card{
+    width: 25%;
+}
+
+.awaiting_income_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.awaiting_income_inner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2px;
+}
+
+.withdrawal_title_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.withdrawal_details_container{
+    width: 100%;
+}
+
+.dot_beofre::before{
+    content: '\2022';
+    font-size: 2em;
+    line-height: 1;
+    margin-right: 10px;
+    vertical-align: middle;
+    color: #0d6efd;
+}

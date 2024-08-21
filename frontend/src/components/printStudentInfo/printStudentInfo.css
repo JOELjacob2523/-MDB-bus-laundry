@@ -1,0 +1,29 @@
+.print_student_info_btn{
+    width: 100px;
+    height: 100px;
+    font-size: x-large;
+    border-radius: 50%;
+    color: rgb(179, 179, 179);
+}
+
+.print_container{
+    display: flex;
+    flex-direction: row;
+}
+
+.print_student_info_container{
+    width: 80%;
+}
+
+.print_student_table_info_btn{
+    padding-top: 50px;
+}
+
+.google_maps_btn_container{
+    padding-top: 50px;
+}
+
+.google_maps_modal{
+    padding: 15px;
+    height: 700px;
+}

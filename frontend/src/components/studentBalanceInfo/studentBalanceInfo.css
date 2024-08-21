@@ -1,0 +1,22 @@
+.main_content_container{
+    width: 200px;
+}
+
+.content_container{
+   display: flex;
+   padding: 0 5px 0 5px;
+}
+
+.content_inner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.total_balance_info{
+    padding: 0 0 3px 5px;
+}
+
+.balance_info_popover{
+    font-size: large;
+}

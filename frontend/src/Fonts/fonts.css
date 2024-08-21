@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'OYoelTovia';
+    src: local('OYoelTovia'), url('./OYoelTovia.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'OYoelToviaBold';
+    src: local('OYoelToviaBold'), url('./OYoelToviaBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }

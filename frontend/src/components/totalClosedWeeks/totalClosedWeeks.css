@@ -1,0 +1,33 @@
+.main_content_weeks_container{
+    width: 200px;
+}
+
+.content_weeks_container{
+   display: flex;
+   flex-direction: column;
+   padding: 0 5px 0 5px;
+}
+
+.total_sedra_card_container{
+    width: 325px;
+}
+
+.total_weeks_description_container{
+    text-align: center;
+}
+
+.sedra_item_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.sedra_item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.total_weeks_icon{
+    font-size: 20px;
+}

@@ -1,0 +1,37 @@
+.header_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;  
+    min-height: 100px;
+    background-color: lightgray;
+}
+
+.KY_symbol_container{
+    filter: drop-shadow(3px -3px 3px gray);
+}
+
+.KY_symbol_img {
+    width: 250px;
+}
+
+.hebrew_date{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.profile_container{
+    width: 5%;
+}
+
+.profile_btn{
+    height: fit-content;
+    border: 0;
+    background-color: lightgray;
+}
+
+.profile{
+    font-size: xx-large;
+}
