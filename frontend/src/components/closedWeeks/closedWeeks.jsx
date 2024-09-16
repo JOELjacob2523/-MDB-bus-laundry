@@ -8,13 +8,13 @@ import {
   Input,
   Select,
   Space,
-  Modal,
   Drawer,
+  message,
 } from "antd";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import HebrewDatePicker from "../jewishDtaePicker/hebcalDatePicker";
-import { zmanGoalInfo } from "../../servers/postRequest";
+import { MDBzmanGoalInfo } from "../../servers/mongoDB/studentRequests/postRequests";
 import { useNavigate } from "react-router-dom";
 import SedraSelect from "../sedraSelect/sedraSelect";
 import { FaPlus } from "react-icons/fa";
@@ -92,12 +92,11 @@ const ClosedWeeks = () => {
   const handleSubmit = async (values) => {
     try {
       setLoading(true);
-      await zmanGoalInfo(values);
+      await MDBzmanGoalInfo(values);
       setTimeout(() => {
-        Modal.success({
-          title: "Success",
+        message.open({
+          type: "success",
           content: "Zman goal added successfully",
-          footer: null,
         });
       }, 2000);
       navigate("/home/buses");
@@ -192,7 +191,6 @@ const ClosedWeeks = () => {
                           style={{ width: "200px" }}
                           placeholder="Search to Select"
                           onChange={(value) => {
-                            console.log(value);
                             const updatedSedras = [...selectedSedras];
                             updatedSedras[index] = value;
                             setSelectedSedras(updatedSedras);

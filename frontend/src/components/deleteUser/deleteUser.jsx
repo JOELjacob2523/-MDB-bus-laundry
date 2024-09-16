@@ -5,6 +5,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { CgDanger } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { deleteUserInfo } from "../../servers/postRequest";
+import { MDBdeleteUserInfo } from "../../servers/mongoDB/studentRequests/postRequests";
 
 const DeleteUser = ({ student }) => {
   const [visible, setVisible] = useState(false);
@@ -12,9 +13,10 @@ const DeleteUser = ({ student }) => {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
-    console.log("Delete confirmed for student:", student.student_id);
+    console.log("Delete confirmed for student:", student._id);
     try {
-      await deleteUserInfo(student.student_id);
+      await MDBdeleteUserInfo(student._id);
+      // await deleteUserInfo(student.student_id);
       message.open({
         title: "success",
         content: "Student deleted successfully",

@@ -70,7 +70,7 @@ const UserCard = ({ student, payment, isSelected, handleCheckboxChange }) => {
               <div>
                 <Checkbox
                   checked={isSelected}
-                  onChange={() => handleCheckboxChange(student.student_id)}
+                  onChange={() => handleCheckboxChange(student._id)}
                 >
                   Archive
                 </Checkbox>
@@ -159,7 +159,7 @@ const UserCard = ({ student, payment, isSelected, handleCheckboxChange }) => {
           footer={null}
         >
           <EditUser
-            studentId={student.student_id}
+            studentId={student._id}
             token={student.token}
             handleCancel={handleEditCancel}
           />
@@ -172,7 +172,7 @@ const UserCard = ({ student, payment, isSelected, handleCheckboxChange }) => {
           footer={null}
         >
           <PaymentOptions
-            studentId={student.student_id}
+            studentId={student._id}
             token={student.token}
             handleCancel={handlePaymentCancel}
           />

@@ -11,6 +11,8 @@ import {
 } from "antd";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { getUserInfoById } from "../../servers/getRequest";
+import { MDBgetUserInfoById } from "../../servers/mongoDB/studentRequests/getRequests";
+import { MDBpayments } from "../../servers/mongoDB/studentRequests/postRequests";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { payments } from "../../servers/postRequest";
@@ -48,8 +50,9 @@ const PaymentOptions = ({ studentId, token, handleCancel }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getUserInfoById(studentId, token);
-        if (data && data.student_id) {
+        // const data = await getUserInfoById(studentId, token);
+        const data = await MDBgetUserInfoById(studentId, token);
+        if (data && data._id) {
           setUserInfo(data);
         } else {
           console.error("Invalid user data:", data);
@@ -75,8 +78,14 @@ const PaymentOptions = ({ studentId, token, handleCancel }) => {
 
   const onFinish = async (values) => {
     try {
-      const formData = { ...values, payment_type: value };
-      await payments(formData);
+      const formData = {
+        ...values,
+        payment_type: value,
+        student_id: userInfo._id,
+      };
+      // await payments(formData);
+      await MDBpayments(formData);
+
       messageApi.open({
         type: "success",
         content: "Payment added successfully",
@@ -86,10 +95,6 @@ const PaymentOptions = ({ studentId, token, handleCancel }) => {
       }, 2000);
     } catch (error) {
       console.error("Error adding payment:", error);
-      // messageApi.open({
-      //   type: "error",
-      //   content: "Failed to add payment",
-      // });
       navigate("/error500");
     }
   };

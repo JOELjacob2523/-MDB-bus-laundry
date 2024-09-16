@@ -2,7 +2,7 @@ import "../../Fonts/fonts.css";
 import "./main_page2.css";
 import React, { useState, useEffect } from "react";
 import { getAllUserInfo } from "../../servers/getRequest";
-import { getAllZmanGoalInfo } from "../../servers/getRequest";
+import { MDBgetAllZmanGoalInfo } from "../../servers/mongoDB/studentRequests/getRequests";
 import { getAllPaymentInfo } from "../../servers/getRequest";
 import { Card, Spin } from "antd";
 import IncomeProgress from "../imcomeProgress/incomeProgress";
@@ -21,7 +21,7 @@ const MainPage2 = ({ cityCounts }) => {
     const fetchData = async () => {
       try {
         const userData = await getAllUserInfo();
-        const zmanGoalData = await getAllZmanGoalInfo();
+        const zmanGoalData = await MDBgetAllZmanGoalInfo();
         const paymentInfoData = await getAllPaymentInfo();
         setUserInfo(userData);
         setZmanGoal(zmanGoalData);
@@ -43,7 +43,7 @@ const MainPage2 = ({ cityCounts }) => {
   useEffect(() => {
     let now = new Date();
     if (zmanGoal && Array.isArray(zmanGoal) && zmanGoal.length > 0) {
-      let zmanEnd = new Date(zmanGoal[0].zman_starts_ends?.end?.date);
+      let zmanEnd = new Date(zmanGoal[0].zman_starts_ends[0]?.end?.date);
 
       let differenceInMilliseconds = zmanEnd - now;
       let differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
@@ -131,7 +131,9 @@ const MainPage2 = ({ cityCounts }) => {
                 >
                   די קומענדיגע מאל וואס מען פארט אהיים איז{" "}
                   <strong style={{ fontFamily: "OYoelToviaBold" }}>
-                    פרשת {nextSedra && nextSedra.sedra}
+                    {nextSedra
+                      ? `פרשת ${nextSedra && nextSedra.sedra}`
+                      : `סוף זמן`}
                   </strong>
                 </h4>
                 <IncomeProgress

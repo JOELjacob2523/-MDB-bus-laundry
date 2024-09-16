@@ -2,6 +2,8 @@ import "./editUser.css";
 import { Button, Empty, Form, Input, InputNumber, message, Spin } from "antd";
 import { getUserInfoById } from "../../servers/getRequest";
 import { updateUserInfo } from "../../servers/postRequest";
+import { MDBgetUserInfoById } from "../../servers/mongoDB/studentRequests/getRequests";
+import { MDBupdateUserInfo } from "../../servers/mongoDB/studentRequests/postRequests";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -35,14 +37,10 @@ const EditUser = ({ studentId, token, handleCancel }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // if (!userId || !token) {
-      //   console.error("Missing userId or token");
-      //   setLoading(false);
-      //   return;
-      // }
       try {
-        const data = await getUserInfoById(studentId, token);
-        if (data && data.student_id) {
+        // const data = await getUserInfoById(studentId, token);
+        const data = await MDBgetUserInfoById(studentId, token);
+        if (data && data._id) {
           setUserInfo(data);
         } else {
           console.error("Invalid user data:", data);
@@ -58,7 +56,8 @@ const EditUser = ({ studentId, token, handleCancel }) => {
 
   const onFinish = async (values) => {
     try {
-      await updateUserInfo(values);
+      // await updateUserInfo(values);
+      await MDBupdateUserInfo(values);
       messageApi.open({
         type: "success",
         content: "Student updated successfully",
@@ -92,10 +91,10 @@ const EditUser = ({ studentId, token, handleCancel }) => {
         className="edit_user_form"
         validateMessages={validateMessages}
         initialValues={userInfo}
-        action="/student/update_user_info"
+        // action="/student/update_user_info"
         method="POST"
       >
-        <Form.Item name="student_id" hidden={true}>
+        <Form.Item name="_id" hidden={true}>
           <Input />
         </Form.Item>
         <Form.Item

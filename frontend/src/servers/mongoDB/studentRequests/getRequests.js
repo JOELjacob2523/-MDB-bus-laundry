@@ -17,7 +17,7 @@ export const MDBgetUserInfoById = async (studentId, token) => {
   try {
     const response = await axios.get(`${URL}/get_user_info`, {
       params: {
-        student_id: studentId,
+        _id: studentId,
       },
       headers: {
         Authorization: `Bearer ${token}`,
@@ -27,5 +27,27 @@ export const MDBgetUserInfoById = async (studentId, token) => {
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
+  }
+};
+
+//get payment info
+export const MDBgetAllPaymentInfo = async () => {
+  try {
+    const response = await axios.get(`${URL}/payments`);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+//get zman goal info
+export const MDBgetAllZmanGoalInfo = async () => {
+  try {
+    const response = await axios.get(`${URL}/zman_goal`);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
   }
 };

@@ -54,10 +54,11 @@ const TotalClosedWeeks = ({ zmanGoal }) => {
                   fontFamily: "OYoelToviaBold",
                 }}
               >
-                {zman.zman_starts_ends &&
-                zman.zman_starts_ends.start &&
-                zman.zman_starts_ends.start.jewishDateStrHebrew
-                  ? zman.zman_starts_ends.start.jewishDateStrHebrew
+                {Array.isArray(zman.zman_starts_ends) &&
+                zman.zman_starts_ends[0] &&
+                zman.zman_starts_ends[0].start &&
+                zman.zman_starts_ends[0].start.jewishDateStrHebrew
+                  ? zman.zman_starts_ends[0].start.jewishDateStrHebrew
                   : ""}
               </div>
               <div
@@ -74,10 +75,11 @@ const TotalClosedWeeks = ({ zmanGoal }) => {
                   fontFamily: "OYoelToviaBold",
                 }}
               >
-                {zman.zman_starts_ends &&
-                zman.zman_starts_ends.end &&
-                zman.zman_starts_ends.end.jewishDateStrHebrew
-                  ? zman.zman_starts_ends.end.jewishDateStrHebrew
+                {Array.isArray(zman.zman_starts_ends) &&
+                zman.zman_starts_ends[0] &&
+                zman.zman_starts_ends[0].end &&
+                zman.zman_starts_ends[0].end.jewishDateStrHebrew
+                  ? zman.zman_starts_ends[0].end.jewishDateStrHebrew
                   : ""}
               </div>
               <div

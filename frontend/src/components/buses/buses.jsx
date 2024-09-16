@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Row, Col, Pagination, Empty, Button, message, Typography } from "antd";
 import { getAllPaymentInfo, getAllUserInfo } from "../../servers/getRequest";
 import { MDBgetAllUserInfo } from "../../servers/mongoDB/studentRequests/getRequests";
+import { MDBgetAllPaymentInfo } from "../../servers/mongoDB/studentRequests/getRequests";
 import { archiveOldStudentPayments } from "../../servers/postRequest";
 import AddUser from "../addUser/newUserBtn";
 import UserCard from "./userCard";
@@ -28,14 +29,15 @@ const Buses = () => {
       try {
         const data = await MDBgetAllUserInfo();
         // const data = await getAllUserInfo();
-        const payments = await getAllPaymentInfo();
+        const payments = await MDBgetAllPaymentInfo();
+        // const payments = await getAllPaymentInfo();
 
         const paymentMap = payments.reduce((acc, payment) => {
-          const { student_id } = payment;
-          if (!acc[student_id]) {
-            acc[student_id] = [];
+          const studentId = payment.student_id;
+          if (!acc[studentId]) {
+            acc[studentId] = [];
           }
-          acc[student_id].push(payment);
+          acc[studentId].push(payment);
           return acc;
         }, {});
 
@@ -92,7 +94,7 @@ const Buses = () => {
   // Calculate the cards to display on the current page
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const currentData = filteredUserInfo.slice(startIndex, endIndex);
+  const currentData = (filteredUserInfo || []).slice(startIndex, endIndex);
 
   return (
     <div className="main_buses_container">
@@ -138,7 +140,7 @@ const Buses = () => {
               <Row gutter={16} className="row">
                 {currentData.map((student) => (
                   <Col
-                    key={student.student_id}
+                    key={student._id}
                     xs={24}
                     sm={12}
                     md={8}
@@ -147,8 +149,8 @@ const Buses = () => {
                   >
                     <UserCard
                       student={student}
-                      payment={paymentInfo[student.student_id] || []}
-                      isSelected={selectedUsers.includes(student.student_id)}
+                      payment={paymentInfo[student._id] || []}
+                      isSelected={selectedUsers.includes(student._id)}
                       handleCheckboxChange={handleCheckboxChange}
                     />
                   </Col>
