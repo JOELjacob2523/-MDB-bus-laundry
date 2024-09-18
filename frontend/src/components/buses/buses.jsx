@@ -3,7 +3,6 @@ import "./buses.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Col, Pagination, Empty, Button, message, Typography } from "antd";
-import { getAllPaymentInfo, getAllUserInfo } from "../../servers/getRequest";
 import { MDBgetAllUserInfo } from "../../servers/mongoDB/studentRequests/getRequests";
 import { MDBgetAllPaymentInfo } from "../../servers/mongoDB/studentRequests/getRequests";
 import { archiveOldStudentPayments } from "../../servers/postRequest";
@@ -28,9 +27,7 @@ const Buses = () => {
     const fetchData = async () => {
       try {
         const data = await MDBgetAllUserInfo();
-        // const data = await getAllUserInfo();
         const payments = await MDBgetAllPaymentInfo();
-        // const payments = await getAllPaymentInfo();
 
         const paymentMap = payments.reduce((acc, payment) => {
           const studentId = payment.student_id;

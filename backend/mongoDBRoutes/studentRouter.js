@@ -4,6 +4,9 @@ const {
   PaymentModel,
   ZmanGoalModel,
   OldZmanGoalModel,
+  WithdrawalModel,
+  OldPaymentModel,
+  OldStudentModel,
 } = require("./mongoSchema");
 const multer = require("multer");
 const upload = multer();
@@ -127,6 +130,63 @@ router.get("/zman_goal", async (req, res, next) => {
     res.status(200).json(zmanGoal);
   } catch (err) {
     console.error("Error getting payments credentials:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// router to insert withdrawal info
+router.post("/withdrawals", upload.fields([]), async (req, res, next) => {
+  try {
+    await WithdrawalModel.create(req.body);
+    res.status(200).json({ message: "Withdrawals insert successfully" });
+  } catch (err) {
+    console.error("Error inserting withdrawals credentials:", err);
+    res
+      .status(500)
+      .json({ message: "Error inserting withdrawals", error: err.message });
+  }
+});
+
+// router get all withdrawal info
+router.get("/get_withdrawal", async (req, res, next) => {
+  try {
+    let withdrawal = await WithdrawalModel.find({});
+    res.status(200).json(withdrawal);
+  } catch (err) {
+    console.error("Error getting withdrawal credentials:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// router get old zman goal info
+router.get("/get_old_zman_goal", async (req, res, next) => {
+  try {
+    let oldZmanGoal = await OldZmanGoalModel.find({});
+    res.status(200).json(oldZmanGoal);
+  } catch (err) {
+    console.error("Error getting old zman goal credentials:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// router get old payment info
+router.get("/get_old_payments", async (req, res, next) => {
+  try {
+    let oldPayments = await OldPaymentModel.find({});
+    res.status(200).json(oldPayments);
+  } catch (err) {
+    console.error("Error getting old payments credentials:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// router get old student info
+router.get("/get_old_students", async (req, res, next) => {
+  try {
+    let oldStudents = await OldStudentModel.find({});
+    res.status(200).json(oldStudents);
+  } catch (err) {
+    console.error("Error getting old students credentials:", err);
     res.status(500).json({ success: false, error: err.message });
   }
 });

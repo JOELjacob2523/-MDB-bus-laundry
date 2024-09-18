@@ -1,9 +1,11 @@
 import "../../Fonts/fonts.css";
 import "./main_page2.css";
 import React, { useState, useEffect } from "react";
-import { getAllUserInfo } from "../../servers/getRequest";
-import { MDBgetAllZmanGoalInfo } from "../../servers/mongoDB/studentRequests/getRequests";
-import { getAllPaymentInfo } from "../../servers/getRequest";
+import {
+  MDBgetAllZmanGoalInfo,
+  MDBgetAllUserInfo,
+  MDBgetAllPaymentInfo,
+} from "../../servers/mongoDB/studentRequests/getRequests";
 import { Card, Spin } from "antd";
 import IncomeProgress from "../imcomeProgress/incomeProgress";
 import Error500 from "../error/error";
@@ -20,9 +22,10 @@ const MainPage2 = ({ cityCounts }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await getAllUserInfo();
+        const userData = await MDBgetAllUserInfo();
         const zmanGoalData = await MDBgetAllZmanGoalInfo();
-        const paymentInfoData = await getAllPaymentInfo();
+        const paymentInfoData = await MDBgetAllPaymentInfo();
+
         setUserInfo(userData);
         setZmanGoal(zmanGoalData);
         setPaymentInfo(paymentInfoData);

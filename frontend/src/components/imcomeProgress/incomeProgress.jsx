@@ -51,17 +51,17 @@ const IncomeProgress = ({
       let washSum = 0;
 
       paymentInfo.forEach((payment) => {
-        const { bus, wash, bus_wash } = payment;
+        const { payment_type } = payment;
 
-        if (bus === "1") {
+        if (payment_type === "bus") {
           busSum += totalBus;
         }
 
-        if (wash === "1") {
+        if (payment_type === "wash") {
           washSum += totalWash;
         }
 
-        if (bus_wash === "1") {
+        if (payment_type === "bus_wash") {
           busSum += totalBus;
           washSum += totalWash;
         }

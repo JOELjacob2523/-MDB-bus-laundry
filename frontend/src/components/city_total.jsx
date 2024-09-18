@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllUserInfo } from "../servers/getRequest";
+import { MDBgetAllUserInfo } from "../servers/mongoDB/studentRequests/getRequests";
 import Buttons from "./mainPage2/main_page2";
 
 const CityTotal = () => {
@@ -12,7 +12,8 @@ const CityTotal = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getAllUserInfo();
+        const data = await MDBgetAllUserInfo();
+
         setUserInfo(data);
       } catch (err) {
         console.error("Error fetching data:", err);

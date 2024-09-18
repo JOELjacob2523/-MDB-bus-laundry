@@ -1,9 +1,9 @@
 import "./totalBalance.css";
 import React, { useState, useEffect } from "react";
 import {
-  getAllWithdrawalInfo,
-  getOldPaymentInfo,
-} from "../../servers/getRequest";
+  MDBgetAllWithdrawalInfo,
+  MDBgetOldPaymentInfo,
+} from "../../servers/mongoDB/studentRequests/getRequests";
 
 const formatNumber = (number) => {
   return new Intl.NumberFormat("en-US").format(number);
@@ -18,8 +18,8 @@ const TotalBalance = ({ bus, wash, goalAmount }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getAllWithdrawalInfo();
-        const oldData = await getOldPaymentInfo();
+        const data = await MDBgetAllWithdrawalInfo();
+        const oldData = await MDBgetOldPaymentInfo();
         setWithdrawalData(data);
         setOldPayments(oldData);
       } catch (error) {

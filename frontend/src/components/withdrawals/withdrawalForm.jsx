@@ -5,7 +5,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { IoPersonSharp } from "react-icons/io5";
 import { CiCalendarDate } from "react-icons/ci";
 import { checkAuth } from "../../servers/userRequests/getUserRequest";
-import { withdrawalInfo } from "../../servers/postRequest";
+import { MDBwithdrawalInfo } from "../../servers/mongoDB/studentRequests/postRequests";
 import { useNavigate } from "react-router-dom";
 const layout = {
   labelCol: {
@@ -54,7 +54,7 @@ const WithdrawalForm = () => {
 
   const onFinish = async (values) => {
     try {
-      await withdrawalInfo(values);
+      await MDBwithdrawalInfo(values);
       messageApi.open({
         type: "success",
         content: "Withdrawal info added successfully",

@@ -51,3 +51,47 @@ export const MDBgetAllZmanGoalInfo = async () => {
     console.error("Error fetching data:", error);
   }
 };
+
+//get withdrawal info
+export const MDBgetAllWithdrawalInfo = async () => {
+  try {
+    const response = await axios.get(`${URL}/get_withdrawal`);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+//get old zman goal info
+export const MDBgetOldZmanGoalInfo = async () => {
+  try {
+    const response = await axios.get(`${URL}/get_old_zman_goal`);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+//get old payments info
+export const MDBgetOldPaymentInfo = async () => {
+  try {
+    const response = await axios.get(`${URL}/get_old_payments`);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+//get old students info
+export const MDBgetOldStudentInfo = async () => {
+  try {
+    const response = await axios.get(`${URL}/get_old_students`);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};

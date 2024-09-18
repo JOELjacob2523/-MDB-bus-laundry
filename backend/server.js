@@ -5,6 +5,7 @@ const CONFIG = require("./config.json");
 const cors = require("cors");
 const studentInfoRouter = require("./routes/studentRouter");
 const userRouter = require("./routes/userRouter");
+const MDBuserRouter = require("./mongoDBRoutes/userRouter");
 const bodyParser = require("body-parser");
 const studentRouter = require("./mongoDBRoutes/studentRouter");
 
@@ -30,7 +31,8 @@ app.use(
 );
 // app.use(cors());
 
-app.use("/", userRouter);
+// app.use("/", userRouter);
+app.use("/", MDBuserRouter);
 app.use("/student", studentInfoRouter);
 app.use("/mdb/student", studentRouter);
 

@@ -1,6 +1,10 @@
 import "./studentInfo.css";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { getAllPaymentInfo, getAllUserInfo } from "../../../servers/getRequest";
+import {
+  MDBgetAllUserInfo,
+  MDBgetAllPaymentInfo,
+} from "../../../servers/mongoDB/studentRequests/getRequests";
 import { List } from "antd";
 import KYLetterhead from "../../../images/KY_Letterhead.png";
 
@@ -13,8 +17,10 @@ const StudentInfoToPrint = forwardRef((props, ref) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const students = await getAllUserInfo();
-        const payments = await getAllPaymentInfo();
+        // const students = await getAllUserInfo();
+        // const payments = await getAllPaymentInfo();
+        const students = await MDBgetAllUserInfo();
+        const payments = await MDBgetAllPaymentInfo();
 
         setStudentInfo(students);
         setPaymentInfo(payments);
@@ -24,7 +30,7 @@ const StudentInfoToPrint = forwardRef((props, ref) => {
             key: index,
             ...student,
             payment: payments.find(
-              (payment) => payment.student_id === student.student_id
+              (payment) => payment.student_id === student._id
             ),
             city_state_zip: `${student.city}, ${student.state} ${student.zip_code}`,
           };
