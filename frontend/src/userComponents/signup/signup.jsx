@@ -4,7 +4,6 @@ import { UserOutlined } from "@ant-design/icons";
 import { TbPasswordUser } from "react-icons/tb";
 import { MdOutlineEmail } from "react-icons/md";
 import { Button, Card, Form, Input } from "antd";
-import Error500 from "../../components/error/error";
 import { useNavigate } from "react-router-dom";
 import { MDBuserInfo } from "../../servers/mongoDB/userRequests/postUserRequest";
 import KYLetterhead from "../../images/KY_Letterhead.png";
@@ -18,7 +17,7 @@ const UserSignup = () => {
       navigate("/");
     } catch (error) {
       console.error("Error adding user:", error);
-      <Error500 />;
+      navigate("/error500");
     }
   };
   return (

@@ -37,8 +37,17 @@ const UserLogin = ({ setIsAuthenticated }) => {
         setError("Incorrect username or password. Please try again.");
       }
     } catch (error) {
-      console.error("Error adding user:", error);
-      setError("Incorrect username or password. Please try again.");
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(`${error.response.data.message}. Please try again.`);
+        console.error("Login failed with error:", error);
+      } else {
+        setError("Incorrect username or password. Please try again.");
+        console.error("Login failed with error:", error);
+      }
     }
   };
 

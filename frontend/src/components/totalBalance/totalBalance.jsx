@@ -94,11 +94,11 @@ const TotalBalance = ({ bus, wash, goalAmount }) => {
           </div>
           <div className="total_balance_inner">
             <div style={{ color: balanceColor }}>
-              {busMoney + washMoney ? (
+              {bus + wash + totalOldIncome - (busMoney + washMoney) !== 0 ? (
                 <strong>
                   $
                   {formatNumber(
-                    bus + wash + totalOldIncome - busMoney + washMoney
+                    bus + wash + totalOldIncome - (busMoney + washMoney)
                   )}
                 </strong>
               ) : (

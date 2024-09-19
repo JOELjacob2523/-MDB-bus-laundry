@@ -109,6 +109,7 @@ const WithdrawalSchema = new mongoose.Schema({
   withdrawal_to: String,
   date: String,
   hebrew_date: String,
+  username: String,
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
 });
 

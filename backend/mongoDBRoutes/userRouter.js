@@ -40,16 +40,27 @@ router.post("/signup", upload.fields([]), async (req, res, next) => {
   }
 });
 
-router.get("/check_auth", (req, res) => {
+router.get("/check_auth", async (req, res) => {
   if (req.session && req.session.token) {
-    const decoded = jwt.verify(req.session.token, SECRET_KEY);
-    return res
-      .status(200)
-      .json({ message: "Authenticated", user_id: Number(decoded.user_id) });
+    try {
+      const decoded = jwt.verify(req.session.token, SECRET_KEY);
+
+      const user = await UserModel.findById(decoded.user_id);
+      return res.status(200).json({
+        message: "Authenticated",
+        user_id: user.user_id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+      });
+    } catch (err) {
+      console.error("Error decoding JWT:", err);
+      return res.status(400).json({ message: "Invalid token" });
+    }
   }
   res.status(401).json({ message: "Unauthorized" });
 });
 
+// router to login
 router.post("/login", upload.fields([]), async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -65,13 +76,13 @@ router.post("/login", upload.fields([]), async (req, res, next) => {
     });
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid username" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid password" });
     }
 
     const token = jwt.sign({ user_id: user._id }, SECRET_KEY, {
@@ -92,6 +103,7 @@ router.post("/login", upload.fields([]), async (req, res, next) => {
   }
 });
 
+//function to create confirmation number
 function generateConfirmationNumber() {
   return Math.floor(100000 + Math.random() * 900000);
 }

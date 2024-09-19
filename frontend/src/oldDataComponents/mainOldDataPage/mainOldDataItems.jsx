@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { getOldZmanGoalInfo } from "../../servers/getRequest";
+import { MDBgetOldZmanGoalInfo } from "../../servers/mongoDB/studentRequests/getRequests";
 import { HDate, HebrewDateEvent } from "@hebcal/core";
 import { Radio } from "antd";
 
@@ -27,7 +28,7 @@ const OldZmanData = ({
 
   useEffect(() => {
     const fetchOldZmanData = async () => {
-      const data = await getOldZmanGoalInfo();
+      const data = await MDBgetOldZmanGoalInfo();
       setOldZmanGoal(data);
 
       const newItems = data.map((zmanGoal) => {

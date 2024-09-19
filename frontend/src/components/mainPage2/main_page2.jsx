@@ -125,7 +125,8 @@ const MainPage2 = ({ cityCounts }) => {
             {zmanGoal.map((goal, index) => (
               <div key={index}>
                 <h3 className="rest_weeks" style={{ fontFamily: "OYoelTovia" }}>
-                  עס איז נאך דא {restWeeks} וואכן אינעם זמן ה{goal.zman}
+                  עס איז נאך דא {restWeeks > 1 ? "וואכן" : "1 וואך"} אינעם זמן ה
+                  {goal.zman}
                 </h3>
                 <h4
                   key={index}

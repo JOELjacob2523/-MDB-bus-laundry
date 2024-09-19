@@ -8,7 +8,7 @@ import {
   useMap,
 } from "@vis.gl/react-google-maps";
 import API from "../GoogleAPIKey";
-import { getAllUserInfo } from "../../servers/getRequest";
+import { MDBgetAllUserInfo } from "../../servers/mongoDB/studentRequests/getRequests";
 import HandleDownloadRoutes from "./downloadedRoutes";
 
 const { Option } = Select;
@@ -30,7 +30,7 @@ function Directions() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const studentData = await getAllUserInfo();
+      const studentData = await MDBgetAllUserInfo();
       setStudents(studentData);
       const addresses = studentData
         .map((student) => student.address2)

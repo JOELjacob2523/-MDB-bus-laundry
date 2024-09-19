@@ -3,7 +3,7 @@ import { Button, Card, Form, Input, Select, message } from "antd";
 import { HDate, HebrewDateEvent } from "@hebcal/core";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { IoPersonSharp } from "react-icons/io5";
-import { CiCalendarDate } from "react-icons/ci";
+import { CiCalendarDate, CiUser } from "react-icons/ci";
 import { checkAuth } from "../../servers/userRequests/getUserRequest";
 import { MDBwithdrawalInfo } from "../../servers/mongoDB/studentRequests/postRequests";
 import { useNavigate } from "react-router-dom";
@@ -30,9 +30,10 @@ const validateMessages = {
 /* eslint-enable no-template-curly-in-string */
 
 const WithdrawalForm = () => {
+  const [form] = Form.useForm();
   const [date, setDate] = useState(new Date().toLocaleString());
   const [hebrewDate, setHebrewDate] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userInfo, setUserInfo] = useState(null);
   const [messageApi, contextHolder] = message.useMessage();
 
   const navigate = useNavigate();
@@ -40,7 +41,11 @@ const WithdrawalForm = () => {
   useEffect(() => {
     const updateDates = async () => {
       await checkAuth().then((result) => {
-        setUserId(result.user_id);
+        if (result) {
+          form.setFieldsValue({
+            username: `${result.first_name} ${result.last_name}`,
+          });
+        }
       });
       setDate(new Date().toLocaleString());
 
@@ -48,6 +53,11 @@ const WithdrawalForm = () => {
       const ev = new HebrewDateEvent(hd);
       const HD = ev.render("he-x-NoNikud");
       setHebrewDate(HD);
+
+      form.setFieldsValue({
+        date: new Date().toLocaleString(),
+        hebrew_date: HD,
+      });
     };
     updateDates();
   }, []);
@@ -75,7 +85,7 @@ const WithdrawalForm = () => {
         <Form
           {...layout}
           key={hebrewDate}
-          initialValues={{ date, hebrew_date: hebrewDate, user_id: userId }}
+          form={form}
           name="nest-messages"
           onFinish={onFinish}
           style={{
@@ -115,13 +125,13 @@ const WithdrawalForm = () => {
             />
           </Form.Item>
           <Form.Item name="date" label="Date">
-            <Input value={date} disabled prefix={<CiCalendarDate />} />
+            <Input disabled prefix={<CiCalendarDate />} />
           </Form.Item>
           <Form.Item name="hebrew_date" label="Hebrew date">
-            <Input value={hebrewDate} disabled prefix={<CiCalendarDate />} />
+            <Input disabled prefix={<CiCalendarDate />} />
           </Form.Item>
-          <Form.Item name="user_id">
-            <Input value={userId} hidden />
+          <Form.Item name="username" label="Withdrawal by">
+            <Input disabled prefix={<CiUser />} />
           </Form.Item>
           <Form.Item
             wrapperCol={{

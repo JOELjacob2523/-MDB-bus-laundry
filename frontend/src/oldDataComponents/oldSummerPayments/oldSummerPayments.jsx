@@ -2,6 +2,10 @@ import "../../Fonts/fonts.css";
 import "./oldSummerPayments.css";
 import { useEffect, useState } from "react";
 import { getOldPaymentInfo, getOldStudentInfo } from "../../servers/getRequest";
+import {
+  MDBgetOldPaymentInfo,
+  MDBgetOldStudentInfo,
+} from "../../servers/mongoDB/studentRequests/getRequests";
 import { Card, Descriptions, Empty } from "antd";
 
 const formatNumber = (number) => {
@@ -20,21 +24,21 @@ const OldSummerPayments = ({ oldZmanGoal, selectedZman }) => {
   useEffect(() => {
     const fetchOldPayments = async () => {
       try {
-        const payments = await getOldPaymentInfo();
+        const payments = await MDBgetOldPaymentInfo();
         setPaymentData(payments);
 
         const studentIds = [
           ...new Set(payments.map((payment) => payment.student_id)),
         ];
         const studentDetailsArrays = await Promise.all(
-          studentIds.map((id) => getOldStudentInfo(id))
+          studentIds.map((id) => MDBgetOldStudentInfo(id))
         );
 
         const studentDetails = studentDetailsArrays.flat();
 
         const studentDataMap = studentDetails.reduce((acc, student) => {
-          if (student.student_id) {
-            acc[student.student_id] = student;
+          if (student._id) {
+            acc[student._id] = student;
           }
           return acc;
         }, {});

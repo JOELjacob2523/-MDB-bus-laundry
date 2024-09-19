@@ -47,6 +47,10 @@ const WithdrawalsDetials = () => {
                 <div>{withdrawal.date}</div>
                 <div>:דאטום</div>
               </div>
+              <div className="withdrawal_display_container">
+                <div>{withdrawal.username}</div>
+                <div>:ארויס דורך</div>
+              </div>
             </Descriptions.Item>
           ))
         ) : (
