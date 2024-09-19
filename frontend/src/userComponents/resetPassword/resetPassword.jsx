@@ -1,6 +1,7 @@
 import "./resetPassword.css";
 import React from "react";
 import { resetPassword } from "../../servers/userRequests/postUserRequest";
+import { MDBresetPassword } from "../../servers/mongoDB/userRequests/postUserRequest";
 import { Button, Card, Form, Input, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { TbPasswordUser } from "react-icons/tb";
@@ -12,15 +13,11 @@ const ResetPasswordForm = () => {
   const handleReset = async (values) => {
     const { new_password, confirmationNumber } = values;
     try {
-      await resetPassword(new_password, confirmationNumber);
+      await MDBresetPassword(new_password, confirmationNumber);
       navigate(0);
     } catch (error) {
       console.error("Error resetting password:", error);
-      Modal.error({
-        title: "Error",
-        content: "Failed to reset password, Please try again!",
-        footer: null,
-      });
+      navigate("/error500");
     }
   };
 
@@ -48,19 +45,6 @@ const ResetPasswordForm = () => {
               prefix={<MdOutlineConfirmationNumber />}
             />
           </Form.Item>
-          {/* <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                type: "email",
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input placeholder="Enter your email" prefix={<MdOutlineEmail />} />
-          </Form.Item> */}
           <Form.Item
             label="New password"
             name="new_password"

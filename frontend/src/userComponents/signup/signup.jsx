@@ -6,7 +6,6 @@ import { MdOutlineEmail } from "react-icons/md";
 import { Button, Card, Form, Input } from "antd";
 import Error500 from "../../components/error/error";
 import { useNavigate } from "react-router-dom";
-import { userInfo } from "../../servers/userRequests/postUserRequest";
 import { MDBuserInfo } from "../../servers/mongoDB/userRequests/postUserRequest";
 import KYLetterhead from "../../images/KY_Letterhead.png";
 
@@ -15,7 +14,6 @@ const UserSignup = () => {
 
   const onFinish = async (values) => {
     try {
-      // await userInfo(values);
       await MDBuserInfo(values);
       navigate("/");
     } catch (error) {

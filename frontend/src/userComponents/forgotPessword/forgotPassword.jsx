@@ -1,6 +1,7 @@
 import "./forgotPassword.css";
 import React, { useState } from "react";
 import { sendEmail } from "../../servers/userRequests/postUserRequest";
+import { MDBsendEmail } from "../../servers/mongoDB/userRequests/postUserRequest";
 import { Button, Card, Form, Input, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineEmail } from "react-icons/md";
@@ -25,7 +26,8 @@ const ForgotPasswordForm = () => {
   const handleSubmit = async (values) => {
     const { email } = values;
     try {
-      await sendEmail(email);
+      // await sendEmail(email);
+      await MDBsendEmail(email);
       setIsModalVisible(true);
     } catch (error) {
       console.error("Error sending email:", error);

@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
   last_name: String,
   email: String,
   password: String,
+  confirmationNumber: Number,
   token: String,
   date: {
     type: Date,

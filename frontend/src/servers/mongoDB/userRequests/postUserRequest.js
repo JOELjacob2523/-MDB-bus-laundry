@@ -42,7 +42,7 @@ export const MDBlogin = async (email, password) => {
   }
 };
 
-export const sendEmail = async (email) => {
+export const MDBsendEmail = async (email) => {
   try {
     const response = await axios.post(
       `${URL}/forgot_password`,
@@ -69,6 +69,7 @@ export const MDBresetPassword = async (newPassword, confirmationNumber) => {
     const response = await axios.post(
       `${URL}/reset_password`,
       { newPassword, confirmationNumber },
+      { withCredentials: true },
       {
         headers: {
           "Content-Type": "application/json",

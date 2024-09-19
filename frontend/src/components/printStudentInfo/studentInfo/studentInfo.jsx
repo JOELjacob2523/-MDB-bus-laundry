@@ -1,6 +1,5 @@
 import "./studentInfo.css";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
-import { getAllPaymentInfo, getAllUserInfo } from "../../../servers/getRequest";
 import {
   MDBgetAllUserInfo,
   MDBgetAllPaymentInfo,
@@ -17,8 +16,6 @@ const StudentInfoToPrint = forwardRef((props, ref) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const students = await getAllUserInfo();
-        // const payments = await getAllPaymentInfo();
         const students = await MDBgetAllUserInfo();
         const payments = await MDBgetAllPaymentInfo();
 

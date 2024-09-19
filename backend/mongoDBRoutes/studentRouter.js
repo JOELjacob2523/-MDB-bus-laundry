@@ -3,8 +3,8 @@ const {
   StudentModel,
   PaymentModel,
   ZmanGoalModel,
-  OldZmanGoalModel,
   WithdrawalModel,
+  OldZmanGoalModel,
   OldPaymentModel,
   OldStudentModel,
 } = require("./mongoSchema");
@@ -54,8 +54,6 @@ router.post("/update_user_info", upload.fields([]), async (req, res, next) => {
   try {
     const { _id } = req.body;
     const userInfo = await StudentModel.findByIdAndUpdate(_id, req.body);
-    // req.session.student_id = student_id;
-    console.log(userInfo);
     res.status(200).json({
       message: "User updated successfully",
       token: req.session.token,
@@ -71,7 +69,6 @@ router.post("/delete_user", async (req, res, next) => {
   try {
     const { _id } = req.body;
     await StudentModel.deleteOne({ _id: _id });
-    // req.session.user_id = user_id;
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
     console.error("Error deleting user credentials:", err);

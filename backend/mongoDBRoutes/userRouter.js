@@ -6,6 +6,14 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const bcrypt = require("bcryptjs");
 const CONTORLLER = require("../controller/userInfo");
 const { UserModel } = require("./mongoSchema");
+const nodemailer = require("nodemailer");
+const CONFIG = require("../config.json");
+const React = require("react");
+const ReactDOMServer = require("react-dom/server");
+require("@babel/register")({
+  presets: ["@babel/preset-react"],
+});
+const EmailTemplate = require("../emailTamplate/emailTamplate");
 
 //router to singup
 router.post("/signup", upload.fields([]), async (req, res, next) => {
@@ -84,10 +92,46 @@ router.post("/login", upload.fields([]), async (req, res, next) => {
   }
 });
 
+function generateConfirmationNumber() {
+  return Math.floor(100000 + Math.random() * 900000);
+}
+
 router.post("/forgot_password", upload.fields([]), async (req, res, next) => {
   try {
     const { email } = req.body;
-    await CONTORLLER.sendEmail(email);
+    const confirmationNumber = generateConfirmationNumber();
+
+    await UserModel.updateOne({ email }, { $set: { confirmationNumber } });
+
+    const emailContent = ReactDOMServer.renderToStaticMarkup(
+      React.createElement(EmailTemplate, { confirmationNumber })
+    );
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "jsjprog4119@gmail.com",
+        pass: CONFIG.EMAIL_PASS,
+      },
+    });
+
+    // Email content
+    let mailOptions = {
+      from: "jsjprog4119@gmail.com",
+      to: email,
+      subject: "Password Reset Confirmation",
+      html: emailContent,
+    };
+
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+
     res.status(200).json({
       message: "Email send successfully",
     });
@@ -102,7 +146,23 @@ router.post("/forgot_password", upload.fields([]), async (req, res, next) => {
 router.post("/reset_password", upload.fields([]), async (req, res, next) => {
   try {
     const { newPassword, confirmationNumber } = req.body;
-    await CONTORLLER.resetPassword(newPassword, confirmationNumber);
+
+    const user = await UserModel.findOne({ confirmationNumber });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid confirmation number" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 8);
+
+    await UserModel.updateOne(
+      { email: user.email },
+      { $set: { password: hashedPassword, confirmationNumber: null } }
+    );
+
+    req.session.confirmationNumber = null;
+    req.session.email = null;
+
     res.status(200).json({
       message: "Password reset successfully",
     });
